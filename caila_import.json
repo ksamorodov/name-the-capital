@@ -1,8 +1,8 @@
 {
   "project" : {
-    "id" : "novoe_testovoe_zadan-118460505-htr",
-    "name" : "novoe_testovoe_zadan-118460505-htr",
-    "folder" : "/jaicp"
+    "id" : "name_the_capital-1000239909-FXU",
+    "name" : "name_the_capital-1000239909-FXU",
+    "folder" : "/platform"
   },
   "settings" : {
     "language" : "ru",
@@ -13,24 +13,36 @@
       "tokenizerEngine" : "mystem",
       "useShared" : false
     },
-    "shared" : false
+    "shared" : false,
+    "validation" : {
+      "phraseValidationEnabled" : false,
+      "answerValidationEnabled" : false,
+      "phraseValidationThreshold" : 0.5,
+      "answerValidationThreshold" : 0.8
+    }
   },
   "intents" : [ {
-    "id" : 64952,
     "path" : "/пока",
     "enabled" : true,
     "shared" : false,
     "phrases" : [ {
       "text" : "пока"
-    } ]
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "priority" : 0
   }, {
-    "id" : 64953,
     "path" : "/привет",
     "enabled" : true,
     "shared" : false,
     "phrases" : [ {
       "text" : "привет"
-    } ]
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "priority" : 0
   } ],
   "entities" : [ ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.time", "duckling.duration", "duckling.phone-number", "duckling.email", "duckling.url" ],
@@ -137,5 +149,7 @@
   }, {
     "name" : "zb.number",
     "enabled" : false
-  } ]
+  } ],
+  "faq" : [ ],
+  "skills" : [ ]
 }

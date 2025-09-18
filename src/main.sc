@@ -6,7 +6,7 @@ require: text/text.sc
     
 require: where/where.sc
     module = zenbot-common
-
+    
 require: common.js
     module = zenbot-common
 
@@ -24,19 +24,10 @@ theme: /
 
     state: Start
         q!: $regex</start>
-        a: Начнём.
-
-    state: CityPattern
-        q: * $City *
-        a: Город: {{$parseTree._City.name}}
-        
-    state: Text
-        q: $Word
-        a: Слово из справочника: {{$parseTree._Word.word}}
-
-    state: NoMatch
-        event!: noMatch
-        a: Я не понял. Вы сказали: {{$request.query}}
+        a: Привет! Я бот для игры в угадай столицу
+        a: Я называю страну, а ты - её столицу, в конце игры я показываю, сколько ты угадал
+        buttons:
+            "Начать игру" -> /Инициализация
 
     state: reset
         q!: reset
@@ -45,3 +36,47 @@ theme: /
             $client = {};
         go!: /
 
+    state: Старт игры
+        script:
+            var x = Math.floor(Math.random() * 192);
+                var parseTree = {
+            Countries: [
+                { value: x }
+            ]
+                };
+                $session.selectedCountry = $global.$converters.countryConverter(parseTree).name
+                $session.correctCapital= $global.$converters.country2CapitalConverter(parseTree).name
+        InputText: 
+            prompt = Какая столица у страны {{$session.selectedCountry}}?
+            varName = guessedCity
+            html = 
+            htmlEnabled = false
+            then = /Проверка
+            actions = 
+
+    state: Проверка
+        if: $session.correctCapital== $session.guessedCity
+            script:
+                $session.guessedCapitalCounter++
+            a: Правильно!
+        else: 
+            script:
+                $session.unguessedCapitalCounter++
+            a: Ошибочка(
+        buttons:
+            "Играем дальше" -> /Старт игры
+            "Подвести итоги" -> /Результаты
+
+    state: Инициализация
+        script:
+            $session.guessedCapitalCounter = 0
+            $session.unguessedCapitalCounter = 0
+        a: Отлично, начинаем)
+        go!: /Старт игры
+
+    state: Результаты
+        a: Угадано: {{$session.guessedCapitalCounter}}
+           Не угадано: {{$session.unguessedCapitalCounter}}
+        buttons:
+            "Попробовать еще раз" -> /Инициализация
+            "Закончить" -> /reset
