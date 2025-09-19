@@ -28,7 +28,11 @@ theme: /
         a: Я называю страну, а ты - её столицу, в конце игры я показываю, сколько ты угадал
         buttons:
             "Начать игру" -> /Инициализация
-
+            
+    state: NoMatch
+        event!: noMatch
+        a: Я не понял. Вы сказали: {{$request.query}}
+    
     state: reset
         q!: reset
         script:
@@ -38,14 +42,15 @@ theme: /
 
     state: Старт игры
         script:
-            var x = Math.floor(Math.random() * 192);
-                var parseTree = {
-            Countries: [
-                { value: x }
-            ]
-                };
-                $session.selectedCountry = $global.$converters.countryConverter(parseTree).name
-                $session.correctCapital= $global.$converters.country2CapitalConverter(parseTree).name
+            var rand = $reactions.random(192);
+            var parseTree = {
+                Countries: [
+                    { value: rand }
+                ]
+            };
+            $session.selectedCountry = $global.$converters.countryConverter(parseTree).name
+            $session.correctCapital= $global.$converters.country2CapitalConverter(parseTree).name
+            log($global.$converters.countryConverter(parseTree));
         InputText: 
             prompt = Какая столица у страны {{$session.selectedCountry}}?
             varName = guessedCity
