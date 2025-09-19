@@ -1,5 +1,5 @@
 <test>
-    <test-case id="1">
+    <test-case id="startGameTest">
         <random>1</random>
         <q>/start</q>
         <a>Привет! Я бот для игры в угадай столицу</a>
@@ -9,7 +9,7 @@
         <a>Какая столица у страны Объединённые Арабские Эмираты?</a>
     </test-case>
     
-    <test-case id="2">
+    <test-case id="noMatchTest">
         <q>/start</q>
         <a>Привет! Я бот для игры в угадай столицу</a>
         <a>Я называю страну, а ты - её столицу, в конце игры я показываю, сколько ты угадал</a>
@@ -18,7 +18,7 @@
     </test-case>
 
     
-    <test-case id="4">
+    <test-case id="gameCycleTest">
         <q>/start</q>
         <random>1,2</random>
         <a>Привет! Я бот для игры в угадай столицу</a>
@@ -32,7 +32,7 @@
         <a>Какая столица у страны Нигерия?</a>
     </test-case>
     
-    <test-case id="5">
+    <test-case id="wrongGuessTest">
         <q>/start</q>
         <random>1,2</random>
         <a>Привет! Я бот для игры в угадай столицу</a>
@@ -49,7 +49,7 @@
         <a>Какая столица у страны Нигерия?</a>
     </test-case>
     
-    <test-case id="6">
+    <test-case id="correctGuessTest">
         <q>/start</q>
         <random>3</random>
         <a>Привет! Я бот для игры в угадай столицу</a>
